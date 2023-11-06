@@ -1,44 +1,43 @@
+import React from 'react';
+
 const Faq = () => {
   return (
     <div>
-
-<h2 className="text-5xl mb-10 mt-20 text-blue-500 font-bold text-center">Here are some Frequently Asked Questions...</h2>
+      <h2 className="text-5xl mb-10 mt-20 text-blue-500 font-bold text-center">
+        Group Study FAQs
+      </h2>
       <div className="collapse collapse-arrow bg-base-200">
-        <input type="radio" name="my-accordion-2" />
+        <input type="radio" name="group-study-accordion" />
         <div className="collapse-title text-xl font-medium">
-          How do I submit my assignment online?
+          How can I initiate a group study session?
         </div>
         <div className="collapse-content">
           <p>
-            You can submit your assignment online by logging into your account
-            and following the submission instructions on the website.
+            You can start a group study session by creating a shared document or using a collaborative platform where you and your friends can join, contribute, and discuss the study material together.
           </p>
         </div>
       </div>
 
       <div className="collapse collapse-arrow bg-base-200">
-        <input type="radio" name="my-accordion-2" />
+        <input type="radio" name="group-study-accordion" />
         <div className="collapse-title text-xl font-medium">
-          What is the deadline for assignment submissions?
+          What tools or platforms are best for group study online?
         </div>
         <div className="collapse-content">
           <p>
-            The deadline for assignment submissions is usually specified in the
-            assignment details. Make sure to submit your assignment before the
-            deadline to avoid late penalties.
+            There are various tools available for group study online, such as Google Meet, Zoom, Microsoft Teams, or platforms like Discord and Slack. Choose one that best fits your group's preferences and needs for collaborative studying.
           </p>
         </div>
       </div>
 
       <div className="collapse collapse-arrow bg-base-200">
-        <input type="radio" name="my-accordion-2" />
+        <input type="radio" name="group-study-accordion" />
         <div className="collapse-title text-xl font-medium">
-          Can I edit my submitted assignment?
+          Can we share assignments or documents for collaborative work?
         </div>
         <div className="collapse-content">
           <p>
-            Once you submit your assignment, you may not be able to edit it.
-            It's important to review your work carefully before submission.
+            Yes, you can share assignments or documents for collaborative work. Use cloud storage services like Google Drive, Dropbox, or collaborative document editing platforms like Google Docs or Microsoft Office Online for seamless sharing and editing among your group.
           </p>
         </div>
       </div>
