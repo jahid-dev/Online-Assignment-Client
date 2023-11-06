@@ -25,6 +25,7 @@ const CreateAssignment = () => {
       !assignmentTitle ||
       !difficultyLevel ||
       !description ||
+      !photo ||
       !marks ||
       !dueDate
     ) {
@@ -67,6 +68,7 @@ const CreateAssignment = () => {
             confirmButtonText: "Cool",
           });
         }
+        form.reset()
       });
   };
   return (
