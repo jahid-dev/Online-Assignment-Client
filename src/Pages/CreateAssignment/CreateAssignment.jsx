@@ -2,12 +2,9 @@ import { useContext } from "react";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../firebase/Provider/AuthProvider";
 const CreateAssignment = () => {
-
-
-    const {user} = useContext(AuthContext)
-    const assignmentAddedByUserEmail = user?.email
-    console.log(assignmentAddedByUserEmail);
-    
+  const { user } = useContext(AuthContext);
+  const assignmentAddedByUserEmail = user?.email;
+  console.log(assignmentAddedByUserEmail);
 
   //handle form
 
@@ -23,6 +20,23 @@ const CreateAssignment = () => {
     const marks = form.marks.value;
     const dueDate = form.date.value;
 
+    // Validation
+    if (
+      !assignmentTitle ||
+      !difficultyLevel ||
+      !description ||
+      !marks ||
+      !dueDate
+    ) {
+      Swal.fire({
+        title: "Validation Error",
+        text: "Please fill in all required fields.",
+        icon: "error",
+        confirmButtonText: "OK",
+      });
+      return;
+    }
+
     const newBook = {
       assignmentTitle,
       marks,
@@ -30,7 +44,7 @@ const CreateAssignment = () => {
       difficultyLevel,
       description,
       photo,
-      assignmentAddedByUserEmail
+      assignmentAddedByUserEmail,
     };
     console.log(newBook);
 
@@ -83,12 +97,11 @@ const CreateAssignment = () => {
               className="select select-bordered select-md w-full max-w-xs"
             >
               <option disabled selected>
-              Difficulty Level
+                Difficulty Level
               </option>
               <option>Easy</option>
               <option>Medium</option>
               <option>Hard</option>
-              
             </select>
           </div>
         </div>
@@ -107,7 +120,6 @@ const CreateAssignment = () => {
               />
             </label>
           </div>
-          
         </div>
         {/* form category and details row */}
         <div className="md:flex mb-8">

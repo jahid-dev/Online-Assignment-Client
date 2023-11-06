@@ -16,16 +16,36 @@ const Register = () => {
     const photoURL = e.target.photo.value;
     console.log(name, email, password);
 
+     // Validation
+     if (!name) {
+      toast.error("Name is required");
+      return;
+    }
+    if (!email) {
+      toast.error("Email is required");
+      return;
+    }
+    if (!password) {
+      toast.error("Password is required");
+      return;
+    }
     if (password.length < 6) {
       toast.error("Password must be at least 6 characters");
       return;
-    } else if (!/[A-Z]/.test(password)) {
-      toast.error("Password dosen't have any UpperCase");
-      return;
-    } else if (!/[!@#$%^&*()_+{}[\]:;<>,.?~\\|/]/.test(password)) {
-      toast.error("Password dosen't have special characters");
+    }
+    if (!/[A-Z]/.test(password)) {
+      toast.error("Password doesn't have any uppercase letters");
       return;
     }
+    if (!/[!@#$%^&*()_+{}[\]:;<>,.?~\\|/]/.test(password)) {
+      toast.error("Password doesn't have special characters");
+      return;
+    }
+    if (!photoURL) {
+      toast.error("Photo URL is required");
+      return;
+    }
+
 
     //create user in firebase
     createUser(email, password)
