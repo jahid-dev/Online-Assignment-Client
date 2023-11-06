@@ -7,7 +7,7 @@ const SubmittedAssignments = () => {
   const { user } = useContext(AuthContext);
   //   console.log(user.email);
   const recentEmail = user?.email;
-  console.log(recentEmail);
+
 
  
     fetch("http://localhost:5000/api/v1/takenewassignments")
