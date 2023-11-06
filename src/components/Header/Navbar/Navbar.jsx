@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, Navigate, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../firebase/Provider/AuthProvider";
 import toast from "react-hot-toast";
 
@@ -7,7 +7,7 @@ const Navbar = () => {
   const [theme, setTheme] = useState(
     localStorage.getItem("theme") ? localStorage.getItem("theme") : "light"
   );
-
+const navigate = useNavigate()
   // update state on toggle
   const handleToggle = (e) => {
     if (e.target.checked) {
@@ -30,7 +30,10 @@ const Navbar = () => {
 
   const handleLogOut = () => {
     logOut()
-      .then(() => toast.success("Logged out successfully"))
+      .then(() => {
+        toast.success("Logged out successfully")
+        navigate('/')
+      })
       .catch((error) => console.error(error));
   };
 

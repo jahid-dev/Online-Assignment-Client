@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Swal from "sweetalert2";
+import { AuthContext } from "../../firebase/Provider/AuthProvider";
 
 const AssignmentSubmissionForm = ({
   assignmentId,
@@ -12,12 +13,15 @@ const AssignmentSubmissionForm = ({
   const [pdfLink, setPdfLink] = useState("");
   const [note, setNote] = useState("");
 
+  const {user} = useContext(AuthContext)
+  const submitUSerEmail = user?.email
   const handleSubmit = () => {
     const submittedAssignment = {
       name: assignmentTitle,
       assignmentId, // This should be assignmentId, not name
       marks,
-      userEmail,
+     
+      submitUSerEmail,
       pdfLink,
       note,
       date: dueDate,
