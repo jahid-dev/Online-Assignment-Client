@@ -46,30 +46,32 @@ const UpdateAssignment = () => {
     };
     console.log(UpdatedAssignment);
 
-    // send books to server
-    // fetch("http://localhost:5000/api/v1/addnewassignments", {
-    //   method: "POST",
-    //   headers: {
-    //     "content-type": "application/json",
-    //   },
-    //   body: JSON.stringify(newBook),
-    // })
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     console.log(data);
-    //     if (data.insertedId) {
-    //       Swal.fire({
-    //         title: "Success!",
-    //         text: "Product Added Successfully",
-    //         icon: "success",
-    //         confirmButtonText: "Cool",
-    //       });
-    //     }
-    //   });
+    
+    //update to server
+    fetch(` http://localhost:5000/api/v1/allassignments/${_id}`, {
+        method: 'PUT',
+        headers: {
+            'content-type': 'application/json'
+        },
+        body: JSON.stringify(UpdatedAssignment)
+    })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data);
+            if(data.modifiedCount > 0) {
+                Swal.fire({
+                    title: 'Success!',
+                    text: 'Assignment Updated Successfully',
+                    icon: 'success',
+                    confirmButtonText: 'Cool'
+                  })
+            }
+            
+        })
   };
   return (
     <div className=" p-24">
-      <h2 className="text-3xl font-extrabold">Create Assignment</h2>
+      <h2 className="text-3xl font-extrabold">Update Assignment</h2>
       <form onSubmit={handleUpdateAssignment}>
         {/* form name and quantity row */}
         <div className="md:flex mb-8">
