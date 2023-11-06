@@ -48,7 +48,7 @@ const UpdateAssignment = () => {
 
     
     //update to server
-    fetch(` http://localhost:5000/api/v1/allassignments/${_id}`, {
+    fetch(`http://localhost:5000/api/v1/allassignments/${_id}`, {
         method: 'PUT',
         headers: {
             'content-type': 'application/json'

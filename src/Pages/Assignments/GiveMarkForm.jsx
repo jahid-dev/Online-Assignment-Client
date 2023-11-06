@@ -1,43 +1,45 @@
 import React, { useState } from 'react';
+import Swal from "sweetalert2";
 
-const GiveMarkForm = ({ pdfLink, marks, note }) => {
-
-  const [givenMark, setGivenMark] = useState('');
-  const [feedback, setFeedback] = useState('');
+const GiveMarkForm = ({ pdfLink, marks, note, _id }) => {
+  const [givenMark, setGivenMark] = useState(marks || '');
+  const [feedback, setFeedback] = useState(note || '');
 
   const handleSubmit = () => {
-
-    const submittedAssignment = {
+    const completedAssignment = {
       givenMark,
       pdfLink,
       feedback,
       status: "complete",
     };
 
-    console.log(submittedAssignment);
-
-    
-    /*
-    fetch("http://localhost:5000/api/v1/takenewassignments", {
-      method: "POST",
+    fetch(`http://localhost:5000/api/v1/takenewassignments/${_id}`, {
+      method: "PATCH",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(submittedAssignment),
+      body: JSON.stringify(completedAssignment),
     })
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(`Network response was not ok: ${res.status}`);
+        }
+        return res.json();
+      })
       .then((data) => {
         console.log(data);
-        if (data.insertedId) {
+        if (data.modifiedCount > 0) {
           Swal.fire({
             title: "Success!",
-            text: "Assignment Added Successfully",
+            text: "Assignment Completed Successfully",
             icon: "success",
             confirmButtonText: "Cool",
           });
         }
+      })
+      .catch((error) => {
+        console.error('Error:', error);
       });
-    */
   };
 
   return (
@@ -60,21 +62,22 @@ const GiveMarkForm = ({ pdfLink, marks, note }) => {
             id="feedback"
             className="border"
             name="feedback"
-            value={feedback} // Use value to bind to the state
-            onChange={(e) => setFeedback(e.target.value)} // Update the feedback state
+            value={feedback}
+            onChange={(e) => setFeedback(e.target.value)}
             placeholder="feedback"
           ></textarea>
         </div>
         <div>
           <label htmlFor="givenMark">Mark:</label>
-          <textarea
+          <input
             id="givenMark"
             name="givenMark"
             className="border"
-            value={givenMark} // Use value to bind to the state
-            onChange={(e) => setGivenMark(e.target.value)} // Update the givenMark state
+            type="text"
+            value={givenMark}
+            onChange={(e) => setGivenMark(e.target.value)}
             placeholder="give mark"
-          ></textarea>
+          />
         </div>
         <button className="btn-success" onClick={handleSubmit}>
           Submit

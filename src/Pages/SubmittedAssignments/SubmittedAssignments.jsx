@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext,  useState } from "react";
 import ShowSubmittedAssignment from "../Assignments/ShowSubmittedAssignment";
 import { AuthContext } from "../../firebase/Provider/AuthProvider";
 
@@ -6,7 +6,7 @@ const SubmittedAssignments = () => {
   const [submitAssignment, setSubmitAssignment] = useState([]);
   const { user } = useContext(AuthContext);
   //   console.log(user.email);
-  const recentEmail = user?.email;
+//   const recentEmail = user?.email;
 
 
  

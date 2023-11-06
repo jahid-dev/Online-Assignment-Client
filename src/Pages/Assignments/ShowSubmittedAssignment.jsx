@@ -4,7 +4,7 @@ import GiveMarkForm from "./GiveMarkForm";
 
 
 const ShowSubmittedAssignment = ({ submit }) => {
-  const { name, assignmentId, date, status, marks, userEmail, note, pdfLink } = submit;
+  const { name, _id, assignmentId, date, status, marks, userEmail, note, pdfLink } = submit;
 
   const [showSubmission, setShowSubmission] = useState(false);
 
@@ -43,6 +43,7 @@ const ShowSubmittedAssignment = ({ submit }) => {
                         <div>
                           <GiveMarkForm
                             pdfLink={pdfLink}
+                            _id={_id}
                             marks={marks}
                             note={note}
                             
