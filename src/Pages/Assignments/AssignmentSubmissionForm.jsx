@@ -71,9 +71,11 @@ const AssignmentSubmissionForm = ({
           onChange={(e) => setNote(e.target.value)}
         ></textarea>
       </div>
-      <button onClick={handleSubmit}>Submit</button>
+      <button className="btn-success" onClick={handleSubmit}>Submit</button>
     </div>
   );
 };
 
 export default AssignmentSubmissionForm;
+
+
