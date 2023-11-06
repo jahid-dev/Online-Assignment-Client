@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
+import Swal from 'sweetalert2';
 
 const AssignmentSubmissionForm = ({ assignmentId, userEmail }) => {
   const [pdfLink, setPdfLink] = useState('');
   const [note, setNote] = useState('');
 
   const handleSubmit = () => {
-    // Here, you can handle the submission logic, such as sending the data to a server or updating a database
+    
     const submittedAssignment = {
       assignmentId: assignmentId,
       userEmail: userEmail,
@@ -13,16 +14,28 @@ const AssignmentSubmissionForm = ({ assignmentId, userEmail }) => {
       note: note,
       status: 'pending' 
     };
-    // Perform actions to submit the assignment (e.g., API calls, state updates)
-
-    // Example: You might have an API call to submit the assignment data
-    // api.submitAssignment(submittedAssignment)
-    //   .then(response => {
-    //     // Handle success or errors
-    //   })
-    //   .catch(error => {
-    //     // Handle errors
-    //   });
+    console.log(submittedAssignment);
+    fetch(' http://localhost:5000/api/v1/takenewassignments', {
+        method: 'POST',
+        headers: {
+            'content-type': 'application/json'
+        },
+        body: JSON.stringify(submittedAssignment)
+    })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data);
+            if(data.insertedId){
+                Swal.fire({
+                    title: 'Success!',
+                    text: 'Assignment Added Successfully',
+                    icon: 'success',
+                    confirmButtonText: 'Cool'
+                  })
+            }
+           
+        })
+    
   };
 
   return (

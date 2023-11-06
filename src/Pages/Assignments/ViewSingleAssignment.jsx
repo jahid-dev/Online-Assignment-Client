@@ -1,10 +1,10 @@
 import { Link, useLoaderData } from "react-router-dom";
 import AssignmentSubmissionForm from "./AssignmentSubmissionForm";
+import { useState } from "react";
 
 
 const ViewSingleAssignment = () => {
   const singleAssignment = useLoaderData();
-  console.log(singleAssignment);
   const {
     assignmentTitle,
     marks,
