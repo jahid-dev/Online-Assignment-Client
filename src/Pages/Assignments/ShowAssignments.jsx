@@ -1,7 +1,10 @@
+import { Link } from "react-router-dom";
+
 const ShowAssignments = ({ assignments }) => {
   const {
     assignmentTitle,
     marks,
+    _id,
     dueDate,
     difficultyLevel,
     description,
@@ -25,9 +28,15 @@ const ShowAssignments = ({ assignments }) => {
           <p>Difficulty Level: {difficultyLevel}</p>
           <p>Total Marks: {marks}</p>
           <p>Due Date: {dueDate}</p>
+          <p className="font-bold text-xs">Assignment by: {assignmentAddedByUserEmail}</p>
           </div>
           <div className="card-actions justify-end">
-            <button className="btn btn-primary">Buy Now</button>
+            <Link to={`/viewassignment/${_id}`}>
+            <button className="btn btn-warning">View Assignment</button>
+            </Link>
+            <Link to={`/updateassignment/${_id}`}>
+            <button className="btn btn-success">Update Assignment</button>
+            </Link>
           </div>
         </div>
       </div>

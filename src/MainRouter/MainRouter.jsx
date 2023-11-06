@@ -9,6 +9,8 @@ import Assignments from "../Pages/Assignments/Assignments";
 import MyAssignment from "../Pages/MyAssignment/MyAssignment";
 import CreateAssignment from "../Pages/CreateAssignment/CreateAssignment";
 import SubmittedAssignments from "../Pages/SubmittedAssignments/SubmittedAssignments";
+import ViewSingleAssignment from "../Pages/Assignments/ViewSingleAssignment";
+import UpdateAssignment from "../Pages/Assignments/UpdateAssignment";
 
 const router = createBrowserRouter([
   {
@@ -30,20 +32,34 @@ const router = createBrowserRouter([
         element: <Register></Register>,
       },
       {
-        path:'/assignments',
+        path: "/assignments",
         element: <Assignments></Assignments>,
       },
       {
-        path:'/myassignment',
-        element: <MyAssignment></MyAssignment>
+        path: "/myassignment",
+        element: <MyAssignment></MyAssignment>,
       },
       {
-        path:'/createassignment',
-        element: <CreateAssignment></CreateAssignment>
+        path: "/createassignment",
+        element: <CreateAssignment></CreateAssignment>,
       },
       {
-        path:'/submittedassignments',
-        element:<SubmittedAssignments></SubmittedAssignments>
+        path: "/submittedassignments",
+        element: <SubmittedAssignments></SubmittedAssignments>,
+      },
+      {
+        path: "viewassignment/:id",
+        element: <ViewSingleAssignment></ViewSingleAssignment>,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/api/v1/allassignments/${params.id}`),
+
+        // loader: ({ params }) => fetch(`http://localhost:5000/api/v1/allassignments/6548cd7cf18ec92432945536`)
+      },
+      {
+        path: "/updateassignment/:id",
+        element: <UpdateAssignment></UpdateAssignment>,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/api/v1/allassignments/${params.id}`),
       },
     ],
   },
