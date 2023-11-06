@@ -1,4 +1,6 @@
 import { Link, useLoaderData } from "react-router-dom";
+import AssignmentSubmissionForm from "./AssignmentSubmissionForm";
+
 
 const ViewSingleAssignment = () => {
   const singleAssignment = useLoaderData();
@@ -13,6 +15,12 @@ const ViewSingleAssignment = () => {
     photo,
     assignmentAddedByUserEmail,
   } = singleAssignment;
+
+  const [showSubmission, setShowSubmission] = useState(false);
+
+  const handleSubmissionClick = () => {
+    setShowSubmission(true);
+  };
   return (
     <div className="max-w-[1200px] mx-auto mt-20">
       <div className="card lg:card-side bg-base-100 shadow-xl">
@@ -34,8 +42,15 @@ const ViewSingleAssignment = () => {
           Difficulty Level:  {difficultyLevel}{" "}
           </p>
           <div className="card-actions justify-end">
-            <button className="btn btn-success hover:rounded-full">Take Assignment</button>
-          </div>
+        <button className="btn btn-success hover:rounded-full" onClick={handleSubmissionClick}>
+          Take Assignment
+        </button>
+      </div>
+      {showSubmission && (
+        <div>
+          <AssignmentSubmissionForm  assignmentId={_id} userEmail={assignmentAddedByUserEmail} />
+        </div>
+      )}
         </div>
       </div>
       <div>
