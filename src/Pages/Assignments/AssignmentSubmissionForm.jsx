@@ -6,7 +6,6 @@ const AssignmentSubmissionForm = ({
   assignmentId,
   userEmail,
   assignmentTitle,
-  
   marks,
   dueDate,
 }) => {

@@ -3,19 +3,23 @@ import { AuthContext } from "../../firebase/Provider/AuthProvider";
 import ShowMyAssignment from "../Assignments/ShowMyAssignment";
 
 const MyAssignment = () => {
-  const [showMyAssignment, setShowMyAssignment] = useState([]);
   const { user } = useContext(AuthContext);
-
+  const [showMyAssignment, setShowMyAssignment] = useState([]);
+  
   useEffect(() => {
+    // Fetch data when user email changes or when the component mounts
     fetch("http://localhost:5000/api/v1/takenewassignments")
       .then((res) => res.json())
       .then((data) => {
         const filteredMyAssignment = data.filter(
-          (assignment) => assignment?.submitUserEmail === user?.email
+          (single) => single?.submitUserEmail == user?.email
         );
         setShowMyAssignment(filteredMyAssignment);
       });
-  }, []); // Empty dependency array
+  }, [])
+
+  
+
 
   return (
     <div>
