@@ -14,7 +14,7 @@ const SubmittedAssignments = () => {
       .then((res) => res.json())
       .then((data) => {
         const filterByUser = data.filter(
-          (showSubmit) => showSubmit?.submitUSerEmail == user?.email
+          (showSubmit) => showSubmit?.submitUSerEmail == user?.email && showSubmit?.status == 'pending'
         );
         setSubmitAssignment(filterByUser);
       });
