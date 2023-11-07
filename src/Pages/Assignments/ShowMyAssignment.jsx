@@ -3,7 +3,8 @@ const ShowMyAssignment = ({ showAll }) => {
 
   // Title, feedback, obtain marks, total marks, assignment status
   return (
-    <div key={id} className="h-60 card-compact w-96 bg-base-100 shadow-xl">
+    <div className="flex justify-center">
+      <div  className="lg:h-60 w-96 md:h-full border border-blue-900 card-compact md:w-80  lg:w-96 bg-base-100 shadow-2xl">
       <div className="card-body">
         <h2 className="card-title">Assignment Title: {name}</h2>
         <p className="text-xl font-semibold">Total Marks: {marks}</p>
@@ -15,6 +16,7 @@ const ShowMyAssignment = ({ showAll }) => {
           Teacher Feedback: {status === "pending" ? "Pending" : feedback}
         </p>
       </div>
+    </div>
     </div>
   );
 };

@@ -36,7 +36,7 @@ const data = useLoaderData()
 
 
   return (
-    <div>
+    <div className="max-w-[1200px] mx-auto">
       <h2 className="text-5xl mb-10 mt-20 text-blue-500 font-bold text-center">
         My All Assignments
       </h2>
@@ -46,7 +46,7 @@ const data = useLoaderData()
           <span className="loading flex loading-spinner loading-lg"></span>
         </div>
       ) : (
-        <div className="max-w-[1200px] mx-auto grid gap-5 grid-cols-3">
+        <div className=" grid-cols-1 grid md:grid-cols-2 lg:grid-cols-3 gap-16 ">
           {data.map((showAll) => (
             <ShowMyAssignment showAll={showAll} key={showAll.id} />
           ))}

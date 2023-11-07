@@ -7,7 +7,7 @@ const Navbar = () => {
   const [theme, setTheme] = useState(
     localStorage.getItem("theme") ? localStorage.getItem("theme") : "light"
   );
-const navigate = useNavigate()
+  const navigate = useNavigate();
   // update state on toggle
   const handleToggle = (e) => {
     if (e.target.checked) {
@@ -31,8 +31,8 @@ const navigate = useNavigate()
   const handleLogOut = () => {
     logOut()
       .then(() => {
-        toast.success("Logged out successfully")
-        navigate('/')
+        toast.success("Logged out successfully");
+        navigate("/");
       })
       .catch((error) => console.error(error));
   };
@@ -50,7 +50,11 @@ const navigate = useNavigate()
       <div className="flex  flex-col   lg:flex-row items-center justify-between mb-7 mt-5 ml-2 text-center">
         <div className="flex items-center">
           <Link to="/" className="flex items-center">
-            <img className="w-20" src="https://i.ibb.co/xDqwtJb/attachment-123360235-prev-ui.png" alt="logo" />
+            <img
+              className="w-20"
+              src="https://i.ibb.co/xDqwtJb/attachment-123360235-prev-ui.png"
+              alt="logo"
+            />
             <div className="text-3xl font-semibold ml-2">Course Hero</div>
           </Link>
         </div>
@@ -58,7 +62,11 @@ const navigate = useNavigate()
           <NavLink
             to="/"
             className={({ isActive, isPending }) =>
-              isPending ? "pending" : isActive ? "border-b-4 rounded-lg  border-[#3ce7ae]" : ""
+              isPending
+                ? "pending"
+                : isActive
+                ? "border-b-4 rounded-lg  border-[#3ce7ae]"
+                : ""
             }
           >
             Home
@@ -66,36 +74,74 @@ const navigate = useNavigate()
           <NavLink
             to="/assignments"
             className={({ isActive, isPending }) =>
-              isPending ? "pending" : isActive ? "border-b-4 rounded-lg  border-[#3ce7ae]" : ""
+              isPending
+                ? "pending"
+                : isActive
+                ? "border-b-4 rounded-lg  border-[#3ce7ae]"
+                : ""
             }
           >
             Assignments
           </NavLink>
-          <NavLink
+
+          {user?.email ? (
+            <NavLink
+              to="/createassignment"
+              className={({ isActive, isPending }) =>
+                isPending
+                  ? "pending"
+                  : isActive
+                  ? "border-b-4 rounded-lg  border-[#3ce7ae]"
+                  : ""
+              }
+            >
+              Create Assignment
+            </NavLink>
+          ) : (
+            <button></button>
+          )}
+          {/* <NavLink
             to="/createassignment"
             className={({ isActive, isPending }) =>
               isPending ? "pending" : isActive ? "border-b-4 rounded-lg  border-[#3ce7ae]" : ""
             }
           >
             Create Assignment
-          </NavLink>
-          <NavLink
-            to="/mycompleteassignments"
-            className={({ isActive, isPending }) =>
-              isPending ? "pending" : isActive ? "border-b-4 rounded-lg  border-[#3ce7ae]" : ""
-            }
-          >
-            My Assignment
-          </NavLink>
+          </NavLink> */}
 
-          <NavLink
-            to="/submittedassignments"
-            className={({ isActive, isPending }) =>
-              isPending ? "pending" : isActive ? "border-b-4 rounded-lg  border-[#3ce7ae]" : ""
-            }
-          >
-            Submitted Assignments
-          </NavLink>
+          {user?.email ? (
+            <NavLink
+              to="/mycompleteassignments"
+              className={({ isActive, isPending }) =>
+                isPending
+                  ? "pending"
+                  : isActive
+                  ? "border-b-4 rounded-lg  border-[#3ce7ae]"
+                  : ""
+              }
+            >
+              My Assignment
+            </NavLink>
+          ) : (
+            <button></button>
+          )}
+
+          {user?.email ? (
+            <NavLink
+              to="/submittedassignments"
+              className={({ isActive, isPending }) =>
+                isPending
+                  ? "pending"
+                  : isActive
+                  ? "border-b-4 rounded-lg  border-[#3ce7ae]"
+                  : ""
+              }
+            >
+              Submitted Assignments
+            </NavLink>
+          ) : (
+            <button></button>
+          )}
         </div>
         <div className="lg:hidden">
           <button onClick={toggleMenu} className="text-3xl">
@@ -112,18 +158,49 @@ const navigate = useNavigate()
               <Link to="/" className="block text-xs py-2" onClick={closeMenu}>
                 Home
               </Link>
-              <Link to="/assignments" className="block text-xs py-2" onClick={closeMenu}>
+              <Link
+                to="/assignments"
+                className="block text-xs py-2"
+                onClick={closeMenu}
+              >
                 Assignments
               </Link>
-              <Link to="/createassignment" className="block text-xs py-2" onClick={closeMenu}>
-                Create Assignment
-              </Link>
-              <Link to="/mycompleteassignments" className="block text-xs py-2" onClick={closeMenu}>
+
+              {user?.email ? (
+                <Link
+                  to="/createassignment"
+                  className="block text-xs py-2"
+                  onClick={closeMenu}
+                >
+                  Create Assignment
+                </Link>
+              ) : (
+                <button></button>
+              )}
+              
+              {user?.email ? (
+                <Link
+                to="/mycompleteassignments"
+                className="block text-xs py-2"
+                onClick={closeMenu}
+              >
                 My Assignment
               </Link>
-              <Link to="/submittedassignments" className="block text-xs py-2" onClick={closeMenu}>
+              ) : (
+                <button></button>
+              )}
+              
+              {user?.email ? (
+                <Link
+                to="/submittedassignments"
+                className="block text-xs py-2"
+                onClick={closeMenu}
+              >
                 Submitted Assignments
               </Link>
+              ) : (
+                <button></button>
+              )}
             </div>
           )}
         </div>
@@ -131,10 +208,16 @@ const navigate = useNavigate()
           {user ? (
             <div className="lg:flex items-center">
               {user.photoURL && (
-                <img className="rounded-full w-10 lg:mb-2 ml-36" src={user.photoURL} alt="User" />
+                <img
+                  className="rounded-full w-10 lg:mb-2 ml-36"
+                  src={user.photoURL}
+                  alt="User"
+                />
               )}
               <div className="flex flex-col">
-                <span className="font-semibold font-serif mr-5 lg:mr-10">{user.displayName}</span>
+                <span className="font-semibold font-serif mr-5 lg:mr-10">
+                  {user.displayName}
+                </span>
               </div>
               <a onClick={handleLogOut} className="btn btn-sm">
                 Sign Out
@@ -147,7 +230,11 @@ const navigate = useNavigate()
           )}
         </div>
         <div>
-          <button className={`btn btn-square btn-ghost ${theme === 'dark' ? 'text-dark' : ''}`}>
+          <button
+            className={`btn btn-square btn-ghost ${
+              theme === "dark" ? "text-dark" : ""
+            }`}
+          >
             <label className="swap swap-rotate w-12 h-12">
               <input
                 type="checkbox"
@@ -156,9 +243,17 @@ const navigate = useNavigate()
                 checked={theme === "light" ? false : true}
               />
               {/* light theme sun image */}
-              <img src='https://i.ibb.co/T07wHzr/sun-icon-design-free-png.png' alt="light" className="w-8 h-8 swap-on" />
+              <img
+                src="https://i.ibb.co/T07wHzr/sun-icon-design-free-png.png"
+                alt="light"
+                className="w-8 h-8 swap-on"
+              />
               {/* dark theme moon image */}
-              <img src='https://i.ibb.co/zr45qKn/moon-icon-1868x2048-ifpp8fum.png' alt="dark" className="w-8 h-8 swap-off" />
+              <img
+                src="https://i.ibb.co/zr45qKn/moon-icon-1868x2048-ifpp8fum.png"
+                alt="dark"
+                className="w-8 h-8 swap-off"
+              />
             </label>
           </button>
         </div>

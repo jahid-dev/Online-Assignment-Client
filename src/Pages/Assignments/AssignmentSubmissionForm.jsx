@@ -55,7 +55,7 @@ const AssignmentSubmissionForm = ({
       <div>
         <label htmlFor="pdfLink">PDF Link:</label>
         <input
-        className="border"
+        className="border input input-bordered input-primary w-full max-w-xs"
           type="url"
           id="pdfLink"
           value={pdfLink}
@@ -68,13 +68,15 @@ const AssignmentSubmissionForm = ({
         <label htmlFor="note">Note:</label>
         <textarea
           id="note"
-          className="border"
+          className="border input input-bordered input-primary w-full max-w-xs"
           value={note}
+          required
           placeholder="note"
           onChange={(e) => setNote(e.target.value)}
         ></textarea>
       </div>
       <button className="btn-success" onClick={handleSubmit}>Submit</button>
+      
     </div>
   );
 };

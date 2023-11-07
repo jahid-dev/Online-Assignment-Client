@@ -6,7 +6,7 @@ const FeatureSection = () => {
       </h2>
 
       <div className="grid md:grid-cols-2 grid-cols-1 lg:grid-cols-3 gap-10">
-        <div className="card w-96 bg-base-100 shadow-xl">
+        <div className="card  md:w-96 bg-base-100 shadow-xl">
           <figure>
             <img src="https://i.ibb.co/CM19KDN/la-collaboration-dans-l-icone-de-groupe-illustration-r4mxpe.jpg" alt="Feature 1" />
           </figure>
@@ -21,7 +21,7 @@ const FeatureSection = () => {
           </div>
         </div>
 
-        <div className="card w-96 bg-base-100 shadow-xl">
+        <div className="card md:w-96 bg-base-100 shadow-xl">
           <figure>
             <img src="https://i.ibb.co/GkdcKZr/download.jpg" alt="Feature 2" />
           </figure>
@@ -36,7 +36,7 @@ const FeatureSection = () => {
           </div>
         </div>
 
-        <div className="card w-96 bg-base-100 shadow-xl">
+        <div className="card md:w-96 bg-base-100 shadow-xl">
           <figure>
             <img src="https://i.ibb.co/zXF0WK2/tasks-discussion-forum-color-icon-animation-tasks-discussion-forum-animated-color-icon-tasks-discuss.webp" alt="Feature 3" />
           </figure>
@@ -51,7 +51,7 @@ const FeatureSection = () => {
           </div>
         </div>
 
-        <div className="card w-96 bg-base-100 shadow-xl">
+        <div className="card md:w-96 bg-base-100 shadow-xl">
           <figure>
             <img src="https://i.ibb.co/20r5ChV/online-discussion-isolated-cartoon-vector-illustrations-group-students-having-live-session-during-di.jpg" alt="Feature 4" />
           </figure>
@@ -66,7 +66,7 @@ const FeatureSection = () => {
           </div>
         </div>
 
-        <div className="card w-96 bg-base-100 shadow-xl">
+        <div className="card md:w-96 bg-base-100 shadow-xl">
           <figure>
             <img src="https://i.ibb.co/xjfjr9y/project-tracking-goal-tracker-businessman-260nw-2223370697.webp" alt="Feature 5" />
           </figure>
@@ -81,7 +81,7 @@ const FeatureSection = () => {
           </div>
         </div>
 
-        <div className="card w-96 bg-base-100 shadow-xl">
+        <div className="card md:w-96 bg-base-100 shadow-xl">
           <figure>
             <img src="https://i.ibb.co/R99S31X/reminder-concept-notifications-page-with-notification-bell-new-notice-important-reminder-event-push.jpg" alt="Feature 6" />
           </figure>
