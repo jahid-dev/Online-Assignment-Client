@@ -80,7 +80,7 @@ const navigate = useNavigate()
             Create Assignment
           </NavLink>
           <NavLink
-            to="/myassignment"
+            to="/mycompleteassignments"
             className={({ isActive, isPending }) =>
               isPending ? "pending" : isActive ? "border-b-4 rounded-lg  border-[#3ce7ae]" : ""
             }
@@ -118,7 +118,7 @@ const navigate = useNavigate()
               <Link to="/createassignment" className="block text-xs py-2" onClick={closeMenu}>
                 Create Assignment
               </Link>
-              <Link to="/myassignment" className="block text-xs py-2" onClick={closeMenu}>
+              <Link to="/mycompleteassignments" className="block text-xs py-2" onClick={closeMenu}>
                 My Assignment
               </Link>
               <Link to="/submittedassignments" className="block text-xs py-2" onClick={closeMenu}>
