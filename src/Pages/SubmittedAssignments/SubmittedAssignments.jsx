@@ -7,6 +7,7 @@ const SubmittedAssignments = () => {
   const [submitAssignment, setSubmitAssignment] = useState([]);
   const { user } = useContext(AuthContext);
   const [isLoading, setIsLoading] = useState(true); 
+  const [isComplete, setIsComplete] = useState(false);
   const data = useLoaderData();
   useEffect(() => {
 
@@ -23,6 +24,7 @@ const SubmittedAssignments = () => {
         console.error("Error fetching data:", error);
       } finally {
         setIsLoading(false); 
+        setIsComplete(true);
       }
     };
 
