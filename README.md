@@ -29,3 +29,5 @@
 **Description**: Implement bonus features like meaningful Git commits, a detailed README, PDF preview for submitted assignments, pagination for the "All Assignments" page, form validation for assignment creation and registration, and full responsiveness across different devices (mobile, tablet, and desktop). Additionally, use JWT tokens for private routes.
 
 **Implementation**: Commit regularly with meaningful messages, provide a comprehensive README, integrate PDF preview, add pagination, and implement validation and JWT token usage for private routes.
+
+**Live Link**: https://online-assignment-client.web.app/
