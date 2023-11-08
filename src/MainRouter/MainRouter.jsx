@@ -3,15 +3,14 @@ import MainLayout from "../MainLayout/MainLayout";
 import Home from "../Pages/Home/Home";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
-
 import ErrorElement from "../Components/ErrorElement/ErrorElement";
 import Assignments from "../Pages/Assignments/Assignments";
-
 import CreateAssignment from "../Pages/CreateAssignment/CreateAssignment";
 import SubmittedAssignments from "../Pages/SubmittedAssignments/SubmittedAssignments";
 import ViewSingleAssignment from "../Pages/Assignments/ViewSingleAssignment";
 import UpdateAssignment from "../Pages/Assignments/UpdateAssignment";
 import MyCompletedAssignment from "../components/MyCompletedAssignment/MyCompletedAssignment";
+import PrivateRoute from "./PrivateRoute/PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -26,12 +25,12 @@ const router = createBrowserRouter([
 
       {
         path: "/login",
-        element: <Login></Login>,
+        element:<Login></Login>,
       },
       {
         path: '/mycompleteassignments',
         element: <MyCompletedAssignment></MyCompletedAssignment>,
-        loader: () => fetch('http://localhost:5000/api/v1/takenewassignments')
+        loader: () => fetch('https://online-assignment-server.vercel.app/api/v1/takenewassignments')
       },
       {
         path: "/register",
@@ -44,26 +43,26 @@ const router = createBrowserRouter([
       
       {
         path: "/createassignment",
-        element: <CreateAssignment></CreateAssignment>,
+        element: <PrivateRoute><CreateAssignment></CreateAssignment></PrivateRoute>,
       },
       {
         path: "/submittedassignments",
-        element: <SubmittedAssignments></SubmittedAssignments>,
-        loader: () =>  fetch("http://localhost:5000/api/v1/takenewassignments")
+        element:<PrivateRoute><SubmittedAssignments></SubmittedAssignments></PrivateRoute> ,
+        loader: () =>  fetch("https://online-assignment-server.vercel.app/api/v1/takenewassignments")
       },
       {
         path: "viewassignment/:id",
-        element: <ViewSingleAssignment></ViewSingleAssignment>,
+        element: <PrivateRoute><ViewSingleAssignment></ViewSingleAssignment></PrivateRoute>,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/api/v1/allassignments/${params.id}`),
+          fetch(`https://online-assignment-server.vercel.app/api/v1/allassignments/${params.id}`),
 
-        // loader: ({ params }) => fetch(`http://localhost:5000/api/v1/allassignments/6548cd7cf18ec92432945536`)
+        // loader: ({ params }) => fetch(`https://online-assignment-server.vercel.app/api/v1/allassignments/6548cd7cf18ec92432945536`)
       },
       {
         path: "updateassignment/:id",
-        element: <UpdateAssignment></UpdateAssignment>,
+        element: <PrivateRoute><UpdateAssignment></UpdateAssignment></PrivateRoute>,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/api/v1/allassignments/${params.id}`),
+          fetch(`https://online-assignment-server.vercel.app/api/v1/allassignments/${params.id}`),
       },
     ],
   },

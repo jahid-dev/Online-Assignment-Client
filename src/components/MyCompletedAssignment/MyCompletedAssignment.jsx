@@ -12,7 +12,7 @@ const MyCompletedAssignment = () => {
 //   useEffect(() => {
 //     const fetchData = async () => {
 //       try {
-//         const response = await fetch("http://localhost:5000/api/v1/takenewassignments");
+//         const response = await fetch("https://online-assignment-server.vercel.app/api/v1/takenewassignments");
 //         if (response.ok) {
 //           const data = await response.json();
 //           const filterData = data.filter((singleData) => singleData.submitUserEmail == user?.email);

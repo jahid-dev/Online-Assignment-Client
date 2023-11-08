@@ -1,29 +1,12 @@
-import { useContext, useEffect, useState } from "react";
-import { Link, NavLink, Navigate, useNavigate } from "react-router-dom";
+import { useContext,  useState } from "react";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../firebase/Provider/AuthProvider";
 import toast from "react-hot-toast";
 
 const Navbar = () => {
-  const [theme, setTheme] = useState(
-    localStorage.getItem("theme") ? localStorage.getItem("theme") : "light"
-  );
+ 
   const navigate = useNavigate();
-  // update state on toggle
-  const handleToggle = (e) => {
-    if (e.target.checked) {
-      setTheme("dark");
-    } else {
-      setTheme("light");
-    }
-  };
-
-  // set theme state in local storage on mount & also update local storage on state change
-  useEffect(() => {
-    localStorage.setItem("theme", theme);
-    const localTheme = localStorage.getItem("theme");
-    // add custom data-theme attribute to the html tag required to update the theme using DaisyUI
-    document.querySelector("html").setAttribute("data-theme", localTheme);
-  }, [theme]);
+  
 
   const { user, logOut } = useContext(AuthContext);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -229,34 +212,7 @@ const Navbar = () => {
             </Link>
           )}
         </div>
-        <div>
-          <button
-            className={`btn btn-square btn-ghost ${
-              theme === "dark" ? "text-dark" : ""
-            }`}
-          >
-            <label className="swap swap-rotate w-12 h-12">
-              <input
-                type="checkbox"
-                onChange={handleToggle}
-                // show toggle image based on local storage theme
-                checked={theme === "light" ? false : true}
-              />
-              {/* light theme sun image */}
-              <img
-                src="https://i.ibb.co/T07wHzr/sun-icon-design-free-png.png"
-                alt="light"
-                className="w-8 h-8 swap-on"
-              />
-              {/* dark theme moon image */}
-              <img
-                src="https://i.ibb.co/zr45qKn/moon-icon-1868x2048-ifpp8fum.png"
-                alt="dark"
-                className="w-8 h-8 swap-off"
-              />
-            </label>
-          </button>
-        </div>
+       
       </div>
     </div>
   );

@@ -1,13 +1,22 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../firebase/Provider/AuthProvider";
+import UseAxiosSecure from "../../Hooks/UseAxiosSecure";
 const CreateAssignment = () => {
   const { user } = useContext(AuthContext);
   const assignmentAddedByUserEmail = user?.email;
   console.log(assignmentAddedByUserEmail);
 
+//  const axiosSecure = UseAxiosSecure()
+ 
+//  const url = `/api/v1/addnewassignments`
+//  useEffect(() => {
+//   axiosSecure.get(url)
+//   .then(res =>)
+//  })
+  
+  
   //handle form
-
   const handleAddBook = (event) => {
     event.preventDefault();
 
@@ -50,7 +59,7 @@ const CreateAssignment = () => {
     console.log(newBook);
 
     // send books to server
-    fetch("http://localhost:5000/api/v1/addnewassignments", {
+    fetch("https://online-assignment-server.vercel.app/api/v1/addnewassignments", {
       method: "POST",
       headers: {
         "content-type": "application/json",

@@ -9,7 +9,7 @@ const Assignments = () => {
   const assignmentsPerPage = 3; // Number of assignments per page
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/v1/allassignments")
+    fetch("https://online-assignment-server.vercel.app/api/v1/allassignments")
       .then((res) => res.json())
       .then((data) => {
         setAssignments(data);

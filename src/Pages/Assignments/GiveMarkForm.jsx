@@ -1,12 +1,18 @@
 import React, { useState } from "react";
 import Swal from "sweetalert2";
 
-const GiveMarkForm = ({ pdfLink, marks, note, _id }) => {
+const GiveMarkForm = ({ pdfLink, marks, note, _id, isDelete, onSubmit }) => {
   const [givenMark, setGivenMark] = useState(marks || "");
   const [feedback, setFeedback] = useState(note || "");
   const [pdfLinkError, setPdfLinkError] = useState("");
   const [feedbackError, setFeedbackError] = useState("");
   const [givenMarkError, setGivenMarkError] = useState("");
+
+  const isURL = (str) => {
+    // Basic URL validation function
+    const pattern = /^https?:\/\/.+/;
+    return pattern.test(str);
+  };
 
   const validateForm = () => {
     let isValid = true;
@@ -38,6 +44,7 @@ const GiveMarkForm = ({ pdfLink, marks, note, _id }) => {
       setGivenMarkError("");
     }
 
+    
     return isValid;
   };
 
@@ -52,10 +59,15 @@ const GiveMarkForm = ({ pdfLink, marks, note, _id }) => {
     if (!validateForm()) {
       return;
     }
-
+    const completedAssignment = {
+      givenMark,
+      pdfLink,
+      feedback,
+      status: "complete",
+    };
     console.log(completedAssignment);
 
-    fetch(`http://localhost:5000/api/v1/takenewassignments/${_id}`, {
+    fetch(`https://online-assignment-server.vercel.app/api/v1/takenewassignments/${_id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -77,17 +89,14 @@ const GiveMarkForm = ({ pdfLink, marks, note, _id }) => {
             icon: "success",
             confirmButtonText: "Cool",
           });
+
+          // Pass the completed assignment data to the parent component
+          onSubmit(completedAssignment);
         }
       })
       .catch((error) => {
         console.error("Error:", error);
       });
-  };
-
-  const isURL = (str) => {
-    // Basic URL validation function
-    const pattern = /^https?:\/\/.+/;
-    return pattern.test(str);
   };
 
   return (
@@ -98,7 +107,7 @@ const GiveMarkForm = ({ pdfLink, marks, note, _id }) => {
         <input
           type="url"
           id="pdfLink"
-          defaultValue={pdfLink}
+          value={pdfLink} // Add value attribute
           required
           placeholder="PDF Link"
           className={`input input-bordered input-primary w-full max-w-xs ${
@@ -108,6 +117,20 @@ const GiveMarkForm = ({ pdfLink, marks, note, _id }) => {
         {pdfLinkError && <p className="error-text">{pdfLinkError}</p>}
       </div>
       <div>
+        <label htmlFor="feedback">Note:</label>
+        <textarea
+          id="feedback"
+          className={`input input-bordered input-primary w-full max-w-xs ${
+            feedbackError ? "error" : ""
+          }`}
+          name="feedback"
+          value={note} // Add value attribute
+          onChange={(e) => setFeedback(e.target.value)}
+          placeholder="Feedback"
+        ></textarea>
+        {feedbackError && <p className="error-text">{feedbackError}</p>}
+      </div>
+      <div>
         <label htmlFor="feedback">Feedback:</label>
         <textarea
           id="feedback"
@@ -115,7 +138,7 @@ const GiveMarkForm = ({ pdfLink, marks, note, _id }) => {
             feedbackError ? "error" : ""
           }`}
           name="feedback"
-          value={feedback}
+         // Add value attribute
           onChange={(e) => setFeedback(e.target.value)}
           placeholder="Feedback"
         ></textarea>
@@ -130,7 +153,7 @@ const GiveMarkForm = ({ pdfLink, marks, note, _id }) => {
             givenMarkError ? "error" : ""
           }`}
           type="text"
-          value={givenMark}
+          value={givenMark} // Add value attribute
           onChange={(e) => setGivenMark(e.target.value)}
           placeholder="Mark"
         />

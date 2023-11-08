@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "food-and-beverage-client"
-  }
+    "default": "online-assignment-client",
+    "staging": "online-assignment-client"
+  },
+  "targets": {},
+  "etags": {}
 }

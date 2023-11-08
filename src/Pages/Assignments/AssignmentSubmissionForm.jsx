@@ -35,7 +35,7 @@ const AssignmentSubmissionForm = ({
     };
 
     console.log(submittedAssignment);
-    fetch("http://localhost:5000/api/v1/takenewassignments", {
+    fetch("https://online-assignment-server.vercel.app/api/v1/takenewassignments", {
       method: "POST",
       headers: {
         "content-type": "application/json",

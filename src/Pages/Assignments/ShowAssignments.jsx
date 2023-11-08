@@ -36,7 +36,7 @@ const ShowAssignments = ({ assignments }) => {
     if (checkUser()) {
       return; // Exit early if user check fails
     } else {
-      fetch(`http://localhost:5000/api/v1/allassignments/${_id}`, {
+      fetch(`https://online-assignment-server.vercel.app/api/v1/allassignments/${_id}`, {
         method: "DELETE",
       })
         .then((res) => res.json())
