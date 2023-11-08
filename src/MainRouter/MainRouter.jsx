@@ -49,6 +49,7 @@ const router = createBrowserRouter([
       {
         path: "/submittedassignments",
         element: <SubmittedAssignments></SubmittedAssignments>,
+        loader: () =>  fetch("http://localhost:5000/api/v1/takenewassignments")
       },
       {
         path: "viewassignment/:id",

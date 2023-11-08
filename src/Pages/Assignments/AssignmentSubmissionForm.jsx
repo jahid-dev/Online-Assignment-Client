@@ -8,19 +8,26 @@ const AssignmentSubmissionForm = ({
   assignmentTitle,
   marks,
   dueDate,
+  onClose, // Add onClose prop to handle closing the form
 }) => {
   const [pdfLink, setPdfLink] = useState("");
   const [note, setNote] = useState("");
+  const [error, setError] = useState(""); // Add error state
 
-  const {user} = useContext(AuthContext)
-  const submitUSerEmail = user?.email
+  const { user } = useContext(AuthContext);
+  const submitUserEmail = user?.email;
+
   const handleSubmit = () => {
+    if (!pdfLink || !note) {
+      setError("Both PDF Link and Note are required."); // Validate fields
+      return;
+    }
+
     const submittedAssignment = {
       name: assignmentTitle,
-      assignmentId, // This should be assignmentId, not name
+      assignmentId,
       marks,
-     
-      submitUSerEmail,
+      submitUserEmail,
       pdfLink,
       note,
       date: dueDate,
@@ -45,6 +52,7 @@ const AssignmentSubmissionForm = ({
             icon: "success",
             confirmButtonText: "Cool",
           });
+          onClose(); // Close the form after successful submission
         }
       });
   };
@@ -55,7 +63,7 @@ const AssignmentSubmissionForm = ({
       <div>
         <label htmlFor="pdfLink">PDF Link:</label>
         <input
-        className="border input input-bordered input-primary w-full max-w-xs"
+          className="border input input-bordered input-primary w-full max-w-xs"
           type="url"
           id="pdfLink"
           value={pdfLink}
@@ -75,12 +83,14 @@ const AssignmentSubmissionForm = ({
           onChange={(e) => setNote(e.target.value)}
         ></textarea>
       </div>
-      <button className="btn-success" onClick={handleSubmit}>Submit</button>
-      
+      {error && <p className="text-red-500">{error}</p>} {/* Display validation error message */}
+      <div className="submission-form-buttons">
+        <button className="btn btn-success" onClick={handleSubmit}>
+          Submit
+        </button>
+      </div>
     </div>
   );
 };
 
 export default AssignmentSubmissionForm;
-
-

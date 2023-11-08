@@ -41,13 +41,19 @@ const GiveMarkForm = ({ pdfLink, marks, note, _id }) => {
     return isValid;
   };
 
+  const completedAssignment = {
+    givenMark,
+    pdfLink,
+    feedback,
+    status: "complete",
+  };
+
   const handleSubmit = () => {
     if (!validateForm()) {
       return;
     }
 
-    // Rest of your submission logic here
-    // ...
+    console.log(completedAssignment);
 
     fetch(`http://localhost:5000/api/v1/takenewassignments/${_id}`, {
       method: "PATCH",
@@ -83,59 +89,56 @@ const GiveMarkForm = ({ pdfLink, marks, note, _id }) => {
     const pattern = /^https?:\/\/.+/;
     return pattern.test(str);
   };
-  // <input type="text" placeholder="Type here" className="input input-bordered input-primary w-full max-w-xs" />
+
   return (
-    <div className="">
-      <div className="submission-form  ">
-        <h2>Assignment Submission</h2>
-        <div className=""> 
-          <label htmlFor="pdfLink">PDF Link:</label>
-          {/* <input
-            className={`border ${pdfLinkError ? 'error' : ''}`}
-            type="url"
-            id="pdfLink"
-            defaultValue={pdfLink}
-            required
-          /> */}
-          <input
-            type="url"
-            id="pdfLink"
-            defaultValue={pdfLink}
-            required
-            placeholder="PDF Link"
-            className="input input-bordered input-primary w-full max-w-xs"
-          />
-          {pdfLinkError && <p className="error-text">{pdfLinkError}</p>}
-        </div>
-        <div>
-          <label htmlFor="feedback">Feedback:</label>
-          <textarea
-            id="feedback"
-            className={`border input input-bordered input-primary w-full max-w-xs ${feedbackError ? "error" : ""}`}
-            name="feedback"
-            value={feedback}
-            onChange={(e) => setFeedback(e.target.value)}
-            placeholder="feedback"
-          ></textarea>
-          {feedbackError && <p className="error-text">{feedbackError}</p>}
-        </div>
-        <div>
-          <label htmlFor="givenMark">Mark:</label>
-          <input
-            id="givenMark"
-            name="givenMark"
-            className={` input input-bordered input-primary w-full max-w-xs ${givenMarkError ? "error" : ""}`}
-            type="text"
-            value={givenMark}
-            onChange={(e) => setGivenMark(e.target.value)}
-            placeholder="give mark"
-          />
-          {givenMarkError && <p className="error-text">{givenMarkError}</p>}
-        </div>
-        <button className="btn-success btn mt-5" onClick={handleSubmit}>
-          Submit
-        </button>
+    <div className="submission-form">
+      <h2>Assignment Submission</h2>
+      <div>
+        <label htmlFor="pdfLink">PDF Link:</label>
+        <input
+          type="url"
+          id="pdfLink"
+          defaultValue={pdfLink}
+          required
+          placeholder="PDF Link"
+          className={`input input-bordered input-primary w-full max-w-xs ${
+            pdfLinkError ? "error" : ""
+          }`}
+        />
+        {pdfLinkError && <p className="error-text">{pdfLinkError}</p>}
       </div>
+      <div>
+        <label htmlFor="feedback">Feedback:</label>
+        <textarea
+          id="feedback"
+          className={`input input-bordered input-primary w-full max-w-xs ${
+            feedbackError ? "error" : ""
+          }`}
+          name="feedback"
+          value={feedback}
+          onChange={(e) => setFeedback(e.target.value)}
+          placeholder="Feedback"
+        ></textarea>
+        {feedbackError && <p className="error-text">{feedbackError}</p>}
+      </div>
+      <div>
+        <label htmlFor="givenMark">Mark:</label>
+        <input
+          id="givenMark"
+          name="givenMark"
+          className={`input input-bordered input-primary w-full max-w-xs ${
+            givenMarkError ? "error" : ""
+          }`}
+          type="text"
+          value={givenMark}
+          onChange={(e) => setGivenMark(e.target.value)}
+          placeholder="Mark"
+        />
+        {givenMarkError && <p className="error-text">{givenMarkError}</p>}
+      </div>
+      <button className="btn btn-success mt-5" onClick={handleSubmit}>
+        Submit
+      </button>
     </div>
   );
 };

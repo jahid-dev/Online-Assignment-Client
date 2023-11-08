@@ -1,47 +1,47 @@
-import { useContext,  useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import ShowSubmittedAssignment from "../Assignments/ShowSubmittedAssignment";
 import { AuthContext } from "../../firebase/Provider/AuthProvider";
+import { useLoaderData } from "react-router-dom";
 
 const SubmittedAssignments = () => {
   const [submitAssignment, setSubmitAssignment] = useState([]);
   const { user } = useContext(AuthContext);
-  //   console.log(user.email);
-//   const recentEmail = user?.email;
+  const [isLoading, setIsLoading] = useState(true); 
+  const data = useLoaderData();
+  useEffect(() => {
 
+    const fetchData = async () => {
+      try {
 
- 
-    fetch("http://localhost:5000/api/v1/takenewassignments")
-      .then((res) => res.json())
-      .then((data) => {
-        const filterByUser = data.filter(
-          (showSubmit) => showSubmit?.submitUSerEmail == user?.email && showSubmit?.status == 'pending'
+        const filteredData = data.filter(
+          (showSubmit) =>
+            showSubmit?.submitUserEmail === user?.email &&
+            showSubmit.status === "pending"
         );
-        setSubmitAssignment(filterByUser);
-      });
- 
+        setSubmitAssignment(filteredData);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      } finally {
+        setIsLoading(false); 
+      }
+    };
+
+    fetchData();
+  }, [user]);
 
   return (
-    <div className="max-w-[1200px]  mt-20 mx-auto">
-      <table className="table ">
-        <thead>
-          <tr className="text-center">
-            <th>Assignment Title</th>
-            <th>Mark</th>
-            <th>Due date</th>
-            <th>Status</th>
-            <th>Give Mark</th>
-          </tr>
-        </thead>
-      </table>
-
-      <div className="table overflow-x-auto">
-        {submitAssignment?.map((submit) => (
-          <ShowSubmittedAssignment
-            key={submit.id}
-            submit={submit}
-          ></ShowSubmittedAssignment>
-        ))}
-      </div>
+    <div className="max-w-[1200px] mt-20 mx-auto">
+      {isLoading ? (
+        <div className="flex justify-center mt-52">
+          <span className="loading flex loading-spinner loading-lg"></span>
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16">
+          {submitAssignment?.map((submit) => (
+            <ShowSubmittedAssignment key={submit.id} submit={submit} />
+          ))}
+        </div>
+      )}
     </div>
   );
 };
