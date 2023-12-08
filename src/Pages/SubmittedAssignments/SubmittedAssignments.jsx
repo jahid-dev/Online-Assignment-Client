@@ -19,7 +19,9 @@ const SubmittedAssignments = () => {
     });
 
     // Fetch initial data
-    fetch("https://online-assignment-server.vercel.app/api/v1/takenewassignments")
+    fetch("https://online-assignment-server.vercel.app/api/v1/takenewassignments", {
+      credentials:true,
+    })
       .then((res) => res.json())
       .then((data) => {
         const filterByUser = data.filter(

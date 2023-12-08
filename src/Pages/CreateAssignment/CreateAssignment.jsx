@@ -60,6 +60,7 @@ const CreateAssignment = () => {
 
     // send books to server
     fetch("https://online-assignment-server.vercel.app/api/v1/addnewassignments", {
+      credentials:true,
       method: "POST",
       headers: {
         "content-type": "application/json",
